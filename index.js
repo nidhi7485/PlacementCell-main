@@ -29,6 +29,7 @@ app.use('/', require('./routes/index'))
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI)
+    console.log(process.env.MONGO_URI)
     app.listen(port, () => console.log(`this server is listening on ${port}`))
   } catch (error) {
     console.log(error)
