@@ -1,10 +1,10 @@
-require('dotenv').config()
+// require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 8000
 //database connection
-// const db= require('./config/mongoose');
-const connectDB = require('./config/mongoose')
+const db = require('./config/mongoose')
+// const connectDB = require('./config/mongoose')
 const expressLayouts = require('express-ejs-layouts')
 const cookieParser = require('cookie-parser')
 
@@ -26,13 +26,9 @@ app.set('views', './views')
 
 app.use('/', require('./routes/index'))
 
-const start = async () => {
-  try {
-    await connectDB(process.env.MONGO_URI)
-    console.log(process.env.MONGO_URI)
-    app.listen(port, () => console.log(`this server is listening on ${port}`))
-  } catch (error) {
-    console.log(error)
+app.listen(port, function (err) {
+  if (err) {
+    console.log('Error in running the server in the port :', port)
   }
-}
-start()
+  console.log('server is running on the port', port)
+})
